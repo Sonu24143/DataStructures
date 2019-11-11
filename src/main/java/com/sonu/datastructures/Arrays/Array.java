@@ -1,4 +1,4 @@
-package com.sonu.datastructures;
+package com.sonu.datastructures.Arrays;
 
 public class Array {
 
