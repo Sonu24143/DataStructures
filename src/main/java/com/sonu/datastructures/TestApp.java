@@ -2,14 +2,18 @@ package com.sonu.datastructures;
 
 import com.sonu.datastructures.Arrays.Array;
 import com.sonu.datastructures.Heap.Heap;
+import com.sonu.datastructures.Heap.PriorityQueue;
 import com.sonu.datastructures.LinkedList.LinkedList;
 import com.sonu.datastructures.Queues.RotateString;
+import com.sonu.datastructures.SegmentTree.SegmentTree;
 import com.sonu.datastructures.Stacks.BalancedParanthesis;
 import com.sonu.datastructures.Trees.BinarySearchTree;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestApp {
 
@@ -18,11 +22,31 @@ public class TestApp {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(System.in));
-            testHeap();
+            testSegmentTree();
         } finally {
             br.close();
         }
 
+    }
+
+    static void testSegmentTree() {
+        List<Integer> input = new ArrayList<>();
+        for (int i=0; i<10; i++) input.add(i);
+        SegmentTree st = new SegmentTree(input);
+        st.build();
+        st.print();
+        System.out.println("2->4: "+st.query(2,4));
+        System.out.println("4->7: "+st.query(4,7));
+    }
+
+    static void testPriorityQueue() {
+        PriorityQueue pq = new PriorityQueue(true);
+        for(int i=1; i<10; i++) pq.add(i);
+        pq.print();
+        for(int i=1; i<10; i++) {
+            System.out.println("\nRemoved element: "+ pq.remove());
+            pq.print();
+        }
     }
 
     static void testHeap() {
@@ -34,6 +58,8 @@ public class TestApp {
         h.add(1);
         h.add(5);
         h.add(7);
+        h.add(9);
+        h.add(8);
         h.print();
         System.out.println("\nMax heap: ");
         h.buildHeap(true);
