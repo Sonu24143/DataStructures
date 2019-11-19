@@ -1,6 +1,7 @@
 package com.sonu.datastructures;
 
 import com.sonu.datastructures.Arrays.Array;
+import com.sonu.datastructures.DisjointDatastructure.DisjointDatastructure;
 import com.sonu.datastructures.Heap.Heap;
 import com.sonu.datastructures.Heap.PriorityQueue;
 import com.sonu.datastructures.LinkedList.LinkedList;
@@ -22,11 +23,23 @@ public class TestApp {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(System.in));
-            testSegmentTree();
+            testDisjointSet();
         } finally {
             br.close();
         }
 
+    }
+
+    static void testDisjointSet() {
+        DisjointDatastructure dds = new DisjointDatastructure();
+        for(int i=1; i<11; i++) {
+            dds.add(i*2);
+        }
+        dds.union(2,6);
+        System.out.println("2 -> 5"+dds.isConnected(2,5));
+        dds.union(6,8);
+        dds.union(6,10);
+        System.out.println("8 -> 10: "+dds.isConnected(8,10));
     }
 
     static void testSegmentTree() {
