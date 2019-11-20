@@ -12,6 +12,10 @@ public class DisjointDatastructure {
         tags = new ArrayList<>();
     }
 
+    public List<Integer> getConnections() { return this.connections; }
+
+    public List<Integer> getTags() { return this.tags; }
+
     public void add(int data) {
         this.connections.add(data);
         this.tags.add(data);

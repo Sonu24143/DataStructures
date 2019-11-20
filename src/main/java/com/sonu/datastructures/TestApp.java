@@ -9,8 +9,10 @@ import com.sonu.datastructures.Queues.RotateString;
 import com.sonu.datastructures.SegmentTree.SegmentTree;
 import com.sonu.datastructures.Stacks.BalancedParanthesis;
 import com.sonu.datastructures.Trees.BinarySearchTree;
+import com.sonu.datastructures.Trie.Trie;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -23,11 +25,21 @@ public class TestApp {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new InputStreamReader(System.in));
-            testDisjointSet();
+            testTrie();
         } finally {
             br.close();
         }
+    }
 
+    static void testTrie() throws IOException{
+        Trie trie = new Trie();
+        BufferedReader br = new BufferedReader(new FileReader("/usr/share/dict/words"));
+        String s;
+        long start = System.currentTimeMillis();
+        while ((s=br.readLine()) != null) trie.insert(s.trim());
+        System.out.println("Trie processed in : "+(System.currentTimeMillis() - start)+" ms.");
+        System.out.println("wood: "+trie.search("wood"));
+        System.out.println("notaword: "+trie.search("notaword"));
     }
 
     static void testDisjointSet() {
