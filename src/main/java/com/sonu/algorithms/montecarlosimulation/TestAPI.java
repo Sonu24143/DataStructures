@@ -24,13 +24,14 @@ public class TestAPI {
         System.out.println(unionSet.isConnected(1,9));
         System.out.println(unionSet.isConnected(5,7));
         //unionSet.print();*/
-        int testSize=10000;
-        PercolationThreshold pt = new PercolationThreshold(1000);
+        int testSize=20;
+
         double[] result = new double[testSize];
         long start = System.currentTimeMillis();
         for(int i=0;i<testSize;i++) {
+            PercolationThreshold pt = new PercolationThreshold(50);
             result[i] = pt.getThreshold();
-            //System.out.println("Result["+i+"] = "+result[i]);
+            System.out.println("Result["+i+"] = "+result[i]);
         }
         double threshold = Arrays.stream(result).sum() / testSize;
         System.out.println("Threshold found after: "+testSize+", is: "+threshold+".\nTime taken for test: "+(System.currentTimeMillis()-start)+" ms.");
