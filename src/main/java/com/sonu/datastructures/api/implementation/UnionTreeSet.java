@@ -2,27 +2,27 @@ package com.sonu.datastructures.api.implementation;
 
 import com.sonu.datastructures.api.UnionSet;
 
-public class UnionArraySet implements UnionSet {
+public class UnionTreeSet implements UnionSet {
     private int[] connection;
 
-    public UnionArraySet(int n) {
+    public UnionTreeSet(int n) {
         connection = new int[n];
         for(int i=0; i<n; i++) connection[i] = i;
     }
 
+    private int root(int i) {
+        while ( connection[i] != i ) i = connection[i];
+        return i;
+    }
+
     @Override
     public boolean isConnected(int a, int b) {
-        return (connection[a] == connection[b]);
+        return (root(a) == root(b));
     }
 
     @Override
     public void union(int a, int b) {
-        int sourceA = connection[a];
-        int sourceB = connection[b];
-
-        for(int i=0,n=connection.length; i<n; i++) {
-            if( connection[i] == sourceA ) connection[i] = sourceB;
-        }
+        connection[a] = root(b);
     }
 
     @Override
