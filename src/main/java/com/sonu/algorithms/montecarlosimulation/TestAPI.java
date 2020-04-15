@@ -1,39 +1,67 @@
 package com.sonu.algorithms.montecarlosimulation;
 
-import com.sonu.datastructures.api.UnionSet;
-import com.sonu.datastructures.api.implementation.UnionArraySet;
-import com.sonu.datastructures.api.implementation.UnionTreeSet;
-import com.sonu.datastructures.api.implementation.UnionWeightedTreeSet;
-
-import java.util.Arrays;
-
 public class TestAPI {
 
+    private static Node reverseRoot = null;
+
     public static void main(String[] args) {
-        /*UnionSet unionSet = new UnionWeightedTreeSet(10);
-
-        unionSet.union(1,2);
-        unionSet.union(3,4);
-        unionSet.union(5,6);
-        unionSet.union(7,8);
-        unionSet.union(7,9);
-        unionSet.union(0,5);
-        unionSet.union(8,2);
-        unionSet.union(9,1);
-
-        System.out.println(unionSet.isConnected(1,9));
-        System.out.println(unionSet.isConnected(5,7));
-        //unionSet.print();*/
-        int testSize=20;
-
-        double[] result = new double[testSize];
-        long start = System.currentTimeMillis();
-        for(int i=0;i<testSize;i++) {
-            PercolationThreshold pt = new PercolationThreshold(50);
-            result[i] = pt.getThreshold();
-            System.out.println("Result["+i+"] = "+result[i]);
-        }
-        double threshold = Arrays.stream(result).sum() / testSize;
-        System.out.println("Threshold found after: "+testSize+", is: "+threshold+".\nTime taken for test: "+(System.currentTimeMillis()-start)+" ms.");
+        Node root = createList();
+        printList(root);
+        System.out.println();
+        /*Node tail = reverseListIterative(root);
+        tail.next = null;
+        printList(reverseRoot)*/;
+        printList(reverseListIterative(root));
     }
+
+    static Node reverseListIterative(Node root) {
+        if( root == null ) return null;
+        Node t1 = root;
+        Node t2 = root.next;
+        t1.next = null;
+
+        while ( t2 != null ) {
+            Node temp = t2;
+            t2 = t2.next;
+            temp.next = t1;
+            t1 = temp;
+        }
+        return t1;
+    }
+
+    static Node reverseList(Node root) {
+        if( root.next != null ) {
+            Node cur = reverseList(root.next);
+            cur.next = root;
+        }
+        if( reverseRoot == null ) reverseRoot = root;
+        return root;
+    }
+
+    public static void printList(Node root) {
+        if( root != null ) {
+            System.out.print(root.data+" -> ");
+            printList(root.next);
+        }
+    }
+
+    public static Node createList() {
+        Node root = new Node();
+        root.data = 1;
+        Node head  = root;
+
+        for(int i=2; i<=5; i++) {
+            Node temp = new Node();
+            temp.data = i;
+            temp.next = null;
+            root.next = temp;
+            root = temp;
+        }
+        return head;
+    }
+}
+
+class Node {
+    public int data;
+    public Node next;
 }

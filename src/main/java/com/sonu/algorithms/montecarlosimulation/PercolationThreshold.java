@@ -3,6 +3,7 @@ package com.sonu.algorithms.montecarlosimulation;
 import com.sonu.datastructures.api.UnionSet;
 import com.sonu.datastructures.api.implementation.UnionWeightedTreeSet;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class PercolationThreshold {
@@ -115,5 +116,23 @@ public class PercolationThreshold {
         int rightIndex = pos + 1;
         if(systemState[rightIndex]) return rightIndex;
         return -1;
+    }
+
+    /**
+     * Test method
+     * @param args
+     */
+    public static void main(String[] args) {
+        int testSize=20;
+        double[] result = new double[testSize];
+        long start = System.currentTimeMillis();
+
+        for(int i=0;i<testSize;i++) {
+            PercolationThreshold pt = new PercolationThreshold(50);
+            result[i] = pt.getThreshold();
+            System.out.println("Result["+i+"] = "+result[i]);
+        }
+        double threshold = Arrays.stream(result).sum() / testSize;
+        System.out.println("Threshold found after: "+testSize+", is: "+threshold+".\nTime taken for test: "+(System.currentTimeMillis()-start)+" ms.");
     }
 }
